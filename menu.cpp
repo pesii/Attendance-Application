@@ -1,5 +1,6 @@
 #include "pa7.h"
 #include "menu.h"
+#include "List.h"
 
 Menu::Menu(string new_master_filename, string new_course_list_filename) {
 	master_filename = new_master_filename;
@@ -9,7 +10,16 @@ Menu::Menu(string new_master_filename, string new_course_list_filename) {
 // functions
 // (1) Import course list, populates the master list with items from .csv
 void Menu::import_course() {
-	
+	ifstream infile;
+	infile.open(course_list_filename);
+
+	string input;
+	while(infile.good()) {
+		getline(infile, input, ','); // read string until next comma
+		//cout << string(input, 1, input.length() -2);
+		cout << input << endl;
+	}
+
 }
 
 // (2) Load master list

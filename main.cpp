@@ -1,6 +1,8 @@
 #include "pa7.h"
 #include "attendance.h"
 #include "menu.h"
+#include "ListNode.h"
+#include "List.h"
 
 void get_date(void) {
 	// retrieved from stackoverflow
@@ -13,6 +15,7 @@ void get_date(void) {
 }
 
 int main(void) {
+	/*
 	string filename = "test.csv";
 
 	ofstream outfile;
@@ -29,11 +32,11 @@ int main(void) {
 		cout << data << endl;
 	}
 	infile.close();
+	*/
 
 	Menu b(MASTER_FILENAME, COURSE_FILENAME);
-
-	cout << "courselist: " << b.get_course_list_filename() << endl << "masterlist: " << b.get_master_filename() << endl;
-	b.display_menu();
+	b.import_course();
+	
 
 	return 0;
 }
