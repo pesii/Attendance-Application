@@ -153,10 +153,14 @@
     <ClInclude Include="ListNode.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="pa7.h" />
+    <ClInclude Include="Stack.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="classList.csv" />
     <None Include="test.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="master.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

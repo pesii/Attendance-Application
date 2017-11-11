@@ -1,6 +1,8 @@
 #pragma once
 
 #include "pa7.h"
+#include "List.h"
+#include "ListNode.h"
 
 class Menu {
 private:
@@ -25,7 +27,7 @@ public:
 
 	// functions
 	// (1) Import course list, populates the master list with items from .csv
-	void import_course();
+	void import_course(List &master_list, string filename);
 
 	// (2) Load master list
 	// populates master list with nodes from master.txt
@@ -33,12 +35,12 @@ public:
 
 	// (3) Store master list
 	// Stores contents of master list nodes to master.txt
-	void save_master();
+	void save_master(List master_list);
 
 	// (4) Mark absences
 	// runs through master list, displays student's name, and prompts if s/he was abset
 	// the data is then pushed to the stack that is contained within the node representative of the student
-	void roll_call();
+	void roll_call(List &master);
 
 	// (5) BONUS: Edit absences
 	// prompt for an ID number OR name of student to edit, 
@@ -56,4 +58,11 @@ public:
 
 	// display 
 	void display_menu(); 
+
+	void run_app();
+
+	void generate_report_all(List master);
+
+	void generate_report_by_num_absence(List master,  int num_absence);
+
 };

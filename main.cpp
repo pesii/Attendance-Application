@@ -4,39 +4,28 @@
 #include "ListNode.h"
 #include "List.h"
 
-void get_date(void) {
+string get_date(void) {
 	// retrieved from stackoverflow
 	time_t t = time(0); // get current time
 	struct tm * now = localtime(&t);
-	cout << (now->tm_year + 1900) << '-'
-		<< (now->tm_mon + 1) << '-'
-		<< (now->tm_mday)
-		<< endl;
+
+	string date_now;
+
+	int year = 0, month = 0, day = 0;
+	year = (now->tm_year + 1900);
+	month = (now->tm_mon + 1);
+	day = (now->tm_mday);
+
+	date_now = to_string(year) + '-' + to_string(month) + '-' + to_string(day);
+	
+	return date_now;
 }
 
 int main(void) {
-	/*
-	string filename = "test.csv";
-
-	ofstream outfile;
-
-	outfile.open("test.csv");
-	outfile << "Taylor,Swift,39" << endl;
-	outfile.close();
-
-	ifstream infile;
-	infile.open("test.csv");
-	string data;
+	Menu start(MASTER_FILENAME, COURSE_FILENAME);
 	
-	while (getline(infile, data)) {
-		cout << data << endl;
-	}
-	infile.close();
-	*/
+	start.run_app();
 
-	Menu b(MASTER_FILENAME, COURSE_FILENAME);
-	b.import_course();
-	
 
 	return 0;
 }

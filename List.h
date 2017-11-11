@@ -11,6 +11,21 @@ public:
 	List() {
 		head = nullptr;
 	}
+
+	~List() {
+		ListNode *traversal = head;
+		ListNode *temp;
+
+		while(traversal) {
+			temp = traversal;	
+			traversal = traversal->getNext();
+			delete temp;
+			temp = nullptr;
+		}
+		head = nullptr;
+		traversal = nullptr;
+	}
+
 	// getters
 	ListNode * getHead() { return head; }
 
@@ -20,7 +35,7 @@ public:
 	}
 
 	ListNode * createNode(StudentData record);
-	bool insertFront(StudentData record);
+	bool insertFront(List &master, StudentData record);
 
-	void print();
+	void printList();
 };
