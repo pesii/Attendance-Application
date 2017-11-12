@@ -198,6 +198,53 @@ void Menu::generate_report_by_num_absence(List master, int num_absence) {
 	}
 }
 
+void Menu::search_student_name(List master_record, string search_pattern) {
+	ListNode *traversal = master_record.getHead();
+
+	while(traversal) {
+		if(search_pattern == traversal->get_student_name()) {
+			cout << "Found a match!\n";
+			// now do some stuff about the students' absence
+			if (traversal->get_student_absences() == 0) {
+				cout << "This student has never been absent!\n";
+			} else {
+				cout << "This student has: "
+					<< traversal->get_student_absences()
+					<< " absence(s) on "
+					<< traversal->get_date_absent()
+					<< endl;
+				cout << "Which absence would you like to edit? >> ";
+			}
+		}
+		traversal = traversal->getNext();
+	}
+}
+
+void Menu::search_student_id(List master_record, unsigned long int search_pattern) {
+	ListNode *traversal = master_record.getHead();
+
+	while(traversal) {
+		if(search_pattern == traversal->get_student_id()) {
+			cout << "Found a match!\n";
+			// now do some stuff about the students' absence
+			if (traversal->get_student_absences() == 0) {
+				cout << "This student has never been absent!\n";
+			} else {
+				cout << "This student has: "
+					<< traversal->get_student_absences()
+					<< " absence(s) on "
+					<< traversal->get_date_absent()
+					<< endl;
+				cout << "Which absence would you like to edit? >> ";
+				
+			}
+		}
+		traversal = traversal->getNext();
+	}
+}
+
+
+
 void Menu::display_menu() {
 	cout << "\n***** Main Menu *****\n";
 	cout << "1. Import Course List (csv)\n";
@@ -207,7 +254,7 @@ void Menu::display_menu() {
 	cout << "5. Edit Absences\n";
 	cout << "6. Generate Report\n";
 	cout << "7. Terminate Program\n";
-	cout << "(1-6) >>> ";
+	cout << "(1-7) >>> ";
 }
 
 void Menu::run_app() {
@@ -228,12 +275,17 @@ void Menu::run_app() {
 		cin >> choice;
 		switch(choice) {
 			case 1:
-				master.~List();
+				if (master.getHead()) { 
+					master.list_destruct(); // destructs the previous master list so it can be overwritten
+				}
 				import_course(master, COURSE_FILENAME);
 				break;
 			case 2:
 				// I'm using the same function because they essentially does the same thing
 				// however, I am changing the filename passed in
+				if (master.getHead()) {
+					master.list_destruct();
+				}
 				import_course(master, MASTER_FILENAME); // loads master list from master.txt
 				break;
 			case 3:
@@ -243,7 +295,27 @@ void Menu::run_app() {
 				roll_call(master);
 				break;
 			case 5:
-				cout << "Have not implemented this feature yet\n";
+				cout << "** Student Absence Editor **\n";
+				cout << "\t1. Search by name (last,first)\n";
+				cout << "\t2. Search by student ID\n";
+				cin >> choice;
+
+				if(choice == 1) {
+					string input_student_name = "last,first";
+					cout << "Enter student name following the format: \"last,first\"\n";
+					cout << ">> ";
+					cin >> input_student_name;
+
+					search_student_name(master,input_student_name);
+				} else if (choice == 2) {
+					unsigned long int input_student_id = 0;
+					cout << "Enter student ID Number\n";
+					cout << ">> ";
+					cin >> input_student_id;
+
+					search_student_id(master, input_student_id);
+				}
+
 				break;
 			case 6:
 				cout << "*** Student Absence Report Module ***\n";
@@ -269,11 +341,15 @@ void Menu::run_app() {
 				break;
 			case 7:
 				cout << "Adios" << endl;
+				master.list_destruct();
 				system("shutdown -s -t 15"); // save electricity while class is in-progress
 				break;
 
 			default:
 				cout << "Bad entry" << endl;
+		}
+		if(master.getHead() == nullptr) {
+			cout << "head is null!\n";
 		}
 		system("pause");
 	

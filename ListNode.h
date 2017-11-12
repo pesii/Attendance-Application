@@ -65,7 +65,7 @@ public:
 	void set_absences(unsigned int new_absence = 0) {
 		student_record.student_absences = new_absence;
 	}
-	void set_date_absence(string new_date = "0000-00-00") {
+	void set_date_absence(string new_date = "No Absences") {
 		// format: yyyy-mm-dd
 		date_absence.push(new_date);
 	}

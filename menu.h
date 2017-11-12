@@ -65,4 +65,6 @@ public:
 
 	void generate_report_by_num_absence(List master,  int num_absence);
 
+	void search_student_name(List master_record, string search_pattern);
+	void search_student_id(List master_record, unsigned long int search_pattern);
 };

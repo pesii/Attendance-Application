@@ -6,6 +6,13 @@
 class List {
 private:
 	ListNode *head;
+	void recursive_destruct(ListNode *temp) {
+		if(temp->getNext()) {
+			recursive_destruct(temp->getNext());
+			delete temp;
+		}
+		head = nullptr;
+	} 
 public:
 	// constructor
 	List() {
@@ -13,17 +20,13 @@ public:
 	}
 
 	~List() {
-		ListNode *traversal = head;
-		ListNode *temp;
+		//list_destruct();
+		//	head = nullptr;
+		//cout << "destructor called!\n";
+	}
 
-		while(traversal) {
-			temp = traversal;	
-			traversal = traversal->getNext();
-			delete temp;
-			temp = nullptr;
-		}
-		head = nullptr;
-		traversal = nullptr;
+	void list_destruct() {
+		recursive_destruct(head);	
 	}
 
 	// getters

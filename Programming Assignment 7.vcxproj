@@ -146,6 +146,7 @@
     <ClCompile Include="ListNode.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
+    <ClCompile Include="pa7.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="attendance.h" />
